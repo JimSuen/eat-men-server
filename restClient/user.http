@@ -1,0 +1,8 @@
+POST http://localhost:3333/user/create HTTP/1.1
+content-type: application/json
+
+{
+    "username":"001",
+    "password":"3333",
+    "email":"123@qwe.com"
+}

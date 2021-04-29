@@ -4,10 +4,12 @@ const path = require("path");
 const http = require("http");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const PORT = "3333";
+const userRouter = require("./routes/user");
+
+require("./utils/db.js");
+
+const PORT = process.env.PORT || "3333";
 const app = express();
 app.set("port", PORT);
 
@@ -26,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
