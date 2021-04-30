@@ -2,16 +2,26 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import 'reflect-metadata';
 import { Connection, createConnection } from 'typeorm';
-import { User } from './entity/User';
+import { User } from './entity/user';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
 
-  createConnection()
+  createConnection({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'root',
+    database: 'eat-men',
+    synchronize: true,
+    logging: false,
+    entities: [User],
+  })
     .then(async (connection: Connection) => {
       const user = new User();
-      user.username = 'sun-yan';
+      user.username = 'jim-suen-1';
       user.password = '111';
       user.createAt = new Date();
       user.updateAt = new Date();
